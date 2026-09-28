@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solarcast"
+version = "0.1.0"
+description = "Day-ahead probabilistic PV forecast for Switzerland from the 00Z ICON-CH2-EPS run"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "pandas",
+    "xarray",
+    "zarr>=2.17",
+    "requests",
+]
+
+[project.optional-dependencies]
+# meteodata-lab pins its own compatible eccodes, earthkit-data and numpy ranges
+archive = ["meteodata-lab", "numcodecs", "tqdm"]
+model = ["pvlib", "lightgbm", "scikit-learn"]
+dev = ["pytest", "ipykernel", "matplotlib"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
